@@ -5,8 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-// import blackjack.view.BlackjackGameView;
-// import blackjack.view.BlackjackMenuView;
+import blackjack.view.BlackjackGameView;
+import blackjack.view.BlackjackMenuView;
 import manager.auth.AccountManager;
 import manager.score.HighScoreManager;
 import manager.view.LoginView;
@@ -78,19 +78,19 @@ public class NavigationController {
         setRootWithToolbar(view.getRoot());
     }
 
-    // public void goToBlackjackMenu() {
-    // installShellSceneIfNeeded();
-    // toolbar.updateForScene("blackjack-menu");
-    // // BlackjackMenuView view = new BlackjackMenuView(this);
-    // setRootWithToolbar(view.getRoot());
-    // }
+    public void goToBlackjackMenu() {
+        installShellSceneIfNeeded();
+        toolbar.updateForScene("blackjack-menu");
+        BlackjackMenuView view = new BlackjackMenuView(this);
+        setRootWithToolbar(view.getRoot());
+    }
 
-    // public void goToBlackjackGame() {
-    // installShellSceneIfNeeded();
-    // toolbar.updateForScene("blackjack-game");
-    // BlackjackGameView view = new BlackjackGameView(this);
-    // setRootWithToolbar(view.getRoot());
-    // }
+    public void goToBlackjackGame() {
+        installShellSceneIfNeeded();
+        toolbar.updateForScene("blackjack-game");
+        BlackjackGameView view = new BlackjackGameView(this);
+        setRootWithToolbar(view.getRoot());
+    }
 
     public void goToSnakeGame() {
         installShellSceneIfNeeded();
