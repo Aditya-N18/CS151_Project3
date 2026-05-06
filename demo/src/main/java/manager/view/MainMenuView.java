@@ -79,7 +79,7 @@ public class MainMenuView {
         grid.setAlignment(Pos.CENTER);
 
         Button blackjackBtn = bigButton("Blackjack");
-        blackjackBtn.setOnAction(e -> controller.launchBlackjack());
+        // blackjackBtn.setOnAction(e -> controller.launchBlackjack());
 
         Button snakeBtn = bigButton("Snake");
         snakeBtn.setOnAction(e -> controller.launchSnake());
