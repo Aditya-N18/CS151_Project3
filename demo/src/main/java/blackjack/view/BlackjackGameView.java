@@ -1,5 +1,6 @@
 package blackjack.view;
 
+import blackjack.controller.BlackjackController;
 import blackjack.controller.BlackjackGameLogic;
 import blackjack.model.BlackjackPlayer;
 import blackjack.model.Dealer;
@@ -16,6 +17,7 @@ public class BlackjackGameView {
     private final NavigationController nav;
     private final VBox root;
     private final BlackjackGameLogic logic;
+    private final BlackjackController controller;
 
     private final Label playerCardsLabel;
     private final Label dealerCardsLabel;
@@ -25,6 +27,7 @@ public class BlackjackGameView {
     public BlackjackGameView(NavigationController nav) {
         this.nav = nav;
         this.logic = new BlackjackGameLogic();
+        this.controller = new BlackjackController(this, logic);
 
         logic.startNewRound(100);
 
@@ -34,8 +37,7 @@ public class BlackjackGameView {
         statusLabel = new Label("Game Started");
 
         this.root = build();
-
-        updateView();
+        refresh();
     }
 
     public Region getRoot() {
@@ -50,21 +52,9 @@ public class BlackjackGameView {
         Button hitButton = new Button("Hit");
         Button standButton = new Button("Stand");
 
-        hitButton.setOnAction(e -> {
-            logic.humanHit();
+        hitButton.setOnAction(e -> controller.handleHit());
+        standButton.setOnAction(e -> controller.handleStand());
 
-            if (logic.isHumanBust()) {
-                statusLabel.setText("Player Bust!");
-            }
-
-            updateView();
-        });
-
-        standButton.setOnAction(e -> {
-            logic.humanStand();
-            statusLabel.setText("Round Finished");
-            updateView();
-        });
 
         VBox box = new VBox(
                 15,
@@ -83,7 +73,7 @@ public class BlackjackGameView {
         return box;
     }
 
-    private void updateView() {
+    public void refresh() {
 
         BlackjackPlayer player = logic.getHumanPlayer();
         Dealer dealer = logic.getDealer();
@@ -99,5 +89,8 @@ public class BlackjackGameView {
         balanceLabel.setText(
                 "Balance: $" + player.getBalance()
         );
+    }
+    public void setStatus(String message){
+        statusLabel.setText(message);
     }
 }
