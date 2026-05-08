@@ -32,12 +32,15 @@ public class BlackjackGameView {
     private final Button nextRoundButton;
 
     public BlackjackGameView(NavigationController nav) {
+        this(nav, freshStartedLogic());
+    }
+
+    // Constructor used when loading a saved game with existing logic state
+    public BlackjackGameView(NavigationController nav, BlackjackGameLogic logic) {
         this.nav = nav;
-        this.logic = new BlackjackGameLogic();
+        this.logic = logic;
         this.controller = new BlackjackController(this, logic);
         MusicPlayer.play("blackjack_theme.mp3");
-        
-        logic.startNewRound(100);
 
         playerCardsLabel = new Label();
         dealerCardsLabel = new Label();
@@ -55,6 +58,12 @@ public class BlackjackGameView {
 
         this.root = build();
         refresh();
+    }
+
+    private static BlackjackGameLogic freshStartedLogic() {
+        BlackjackGameLogic logic = new BlackjackGameLogic();
+        logic.startNewRound(100);
+        return logic;
     }
 
     public Region getRoot() {
@@ -91,6 +100,7 @@ public class BlackjackGameView {
 
         return box;
     }
+
     private VBox buildGameOverPanel() {
         Label header = new Label("GAME OVER");
         header.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #b22222;");

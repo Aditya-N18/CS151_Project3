@@ -108,9 +108,28 @@ public class NavigationController {
 
     public void goToBlackjackGame() {
         installShellSceneIfNeeded();
-        toolbar.updateForScene("blackjack-game");
         BlackjackGameView view = new BlackjackGameView(this);
         this.currentBlackjackView = view;
+        toolbar.updateForScene("blackjack-game",
+                () -> view.getController().saveGame());
+        setRootWithToolbar(view.getRoot());
+    }
+
+    /**
+     * Enter the Blackjack game with state restored from a save token.
+     * Throws {@link IllegalArgumentException} if the token is not a valid
+     * blackjack save string; callers should surface that to the user.
+     */
+    public void goToBlackjackGameFromSave(String token) {
+        blackjack.controller.BlackjackGameLogic restored =
+                new blackjack.controller.BlackjackGameLogic();
+        blackjack.model.BlackjackSaveState.decodeInto(token, restored);
+
+        installShellSceneIfNeeded();
+        BlackjackGameView view = new BlackjackGameView(this, restored);
+        this.currentBlackjackView = view;
+        toolbar.updateForScene("blackjack-game",
+                () -> view.getController().saveGame());
         setRootWithToolbar(view.getRoot());
     }
 
