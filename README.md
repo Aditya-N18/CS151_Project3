@@ -37,8 +37,8 @@ Maven: For dependency management and automated builds.
 
 ## Installation Instructions
 1. **Prerequisites:** Java 17 or higher installed. Ensure Maven is installed and configured in your environment.
-2. **Clone the Repository:**  git clone https://github.com/Aditya-N18/CS151_Project3.git 
-3. **Navigate to Project Directory:**    cd CS151_Project3/demo    
+2. **Clone the Repository:** git clone https://github.com/Aditya-N18/CS151_Project3.git 
+3. **Navigate to Project Directory:**   cd CS151_Project3/demo    
 
 
 ## Usage
@@ -49,10 +49,10 @@ Maven: For dependency management and automated builds.
 **mvn test**
 
 ## Contributions
-Thy: Game Manager (entire) + Blackjack save/load + utils (incl. encryption)
+**Thy:** Game Manager (entire) + Blackjack save/load + utils (incl. encryption)
 
-Serife: Blackjack core logic + Blackjack JavaFX UI
+**Serife:** Blackjack core logic + Blackjack JavaFX UI
 
-Adithi: Snake core logic
+**Adithi:** Snake core logic
 
-Aditya: Snake JavaFX UI + game-loop driver + overlays
+**Aditya:** Snake JavaFX UI + game-loop driver + overlays
