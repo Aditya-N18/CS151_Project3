@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import manager.controller.NavigationController;
+import utils.MusicPlayer;
 
 public class BlackjackGameView {
 
@@ -28,6 +29,7 @@ public class BlackjackGameView {
         this.nav = nav;
         this.logic = new BlackjackGameLogic();
         this.controller = new BlackjackController(this, logic);
+        MusicPlayer.play("blackjack_theme.mp3");
 
         logic.startNewRound(100);
 
