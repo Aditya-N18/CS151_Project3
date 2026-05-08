@@ -1,2 +1,8 @@
 blackjack|default|1000
 snake|default|1000
+Snake|thy|0
+Snake|player|0
+Snake|player|30
+blackjack|player|950
+blackjack|player|0
+Snake|player|0

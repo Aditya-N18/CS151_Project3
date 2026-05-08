@@ -85,6 +85,10 @@ public class ToolbarView {
     }
 
     public void updateForScene(String sceneName) {
+        updateForScene(sceneName, null);
+    }
+
+    public void updateForScene(String sceneName, Runnable blackjackSaveAction) {
         clearExtras();
         if (sceneName == null) {
             return;
@@ -94,8 +98,11 @@ public class ToolbarView {
             case "blackjack-menu":
                 break;
             case "blackjack-game":
-                addButton("Save State", () -> {
-                });
+                Runnable saveAction = blackjackSaveAction == null
+                        ? () -> {
+                        }
+                        : blackjackSaveAction;
+                addButton("Save State", saveAction);
                 break;
             case "snake":
                 addLabel("Pause (ESC)");
