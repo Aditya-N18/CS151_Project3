@@ -33,13 +33,33 @@ public class SnakeGameModel {
         int startX = cols / 2;
         int startY = rows / 2;
 
-        snake.add(new GridPoint(startX, startY));
-        snake.add(new GridPoint(startX - 1, startY));
-        snake.add(new GridPoint(startX - 2, startY));
-
         Direction[] directions = Direction.values();
         direction = directions[random.nextInt(directions.length)];
         nextDirection = direction;
+
+        snake.add(new GridPoint(startX, startY));
+
+        switch (direction) {
+            case UP:
+                snake.add(new GridPoint(startX, startY + 1));
+                snake.add(new GridPoint(startX, startY + 2));
+                break;
+
+            case DOWN:
+                snake.add(new GridPoint(startX, startY - 1));
+                snake.add(new GridPoint(startX, startY - 2));
+                break;
+
+            case LEFT:
+                snake.add(new GridPoint(startX + 1, startY));
+                snake.add(new GridPoint(startX + 2, startY));
+                break;
+
+            case RIGHT:
+                snake.add(new GridPoint(startX - 1, startY));
+                snake.add(new GridPoint(startX - 2, startY));
+                break;
+        }
 
         score = 0;
         gameOver = false;

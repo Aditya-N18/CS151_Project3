@@ -2,21 +2,26 @@ package snake.controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import snake.model.Direction;
 import snake.model.SnakeGameModel;
 import snake.view.SnakeGameView;
+import manager.controller.NavigationController;
 
 public class SnakeGameController {
 
     private final SnakeGameModel model;
     private final SnakeGameView view;
     private Timeline gameLoop;
+    private NavigationController nav;
+    private boolean scoreSaved = false;
 
-    public SnakeGameController(SnakeGameModel model, SnakeGameView view) {
+    public SnakeGameController(SnakeGameModel model, SnakeGameView view, NavigationController nav) {
         this.model = model;
         this.view = view;
+        this.nav = nav;
 
         setupKeyboardControls();
         setupGameLoop();
@@ -25,7 +30,23 @@ public class SnakeGameController {
     private void setupKeyboardControls() {
         view.getRoot().setFocusTraversable(true);
 
-        view.getRoot().setOnKeyPressed(event -> {
+        javafx.scene.Scene scene = view.getRoot().getScene();
+        if (scene != null) {
+            attachKeyListener(scene);
+        } else {
+
+            view.getRoot().sceneProperty().addListener((obs, oldScene, newScene) -> {
+                if (newScene != null) {
+                    attachKeyListener(newScene);
+                }
+            });
+        }
+
+        Platform.runLater(() -> view.getRoot().requestFocus());
+    }
+
+    private void attachKeyListener(javafx.scene.Scene scene) {
+        scene.setOnKeyPressed(event -> {
             KeyCode key = event.getCode();
 
             if (key == KeyCode.UP) {
@@ -43,8 +64,6 @@ public class SnakeGameController {
                 restartGame();
             }
         });
-
-        view.getRoot().requestFocus();
     }
 
     private void setupGameLoop() {
@@ -60,17 +79,31 @@ public class SnakeGameController {
         view.draw();
 
         if (model.isGameOver()) {
+            saveScoreOnce();
             gameLoop.stop();
-
-            // Later we will save high score here.
-            // Example:
-            // nav.getHighScoreManager().recordScore(...)
         }
     }
 
+    private void saveScoreOnce() {
+        if (scoreSaved) {
+            return;
+        }
+
+        scoreSaved = true;
+
+        String username = nav.getCurrentUser();
+        int score = model.getScore();
+
+        nav.getHighScoreManager().recordScore("snake", username, score);
+    }
+
     private void restartGame() {
+        gameLoop.stop();
+        scoreSaved = false;
         model.reset();
         view.draw();
-        gameLoop.play();
+        view.getRoot().requestFocus();
+
+        gameLoop.playFromStart();
     }
 }

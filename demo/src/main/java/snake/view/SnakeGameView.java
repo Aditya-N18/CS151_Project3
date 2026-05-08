@@ -47,7 +47,7 @@ public class SnakeGameView {
 
         draw();
 
-        new SnakeGameController(model, this);
+        new SnakeGameController(model, this, nav);
     }
 
     public Region getRoot() {
