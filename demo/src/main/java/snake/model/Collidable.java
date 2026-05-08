@@ -1,5 +1,6 @@
 package snake.model;
 
-public class Collidable {
+public interface Collidable {
     
+    boolean collidesWith(Position position);
 }

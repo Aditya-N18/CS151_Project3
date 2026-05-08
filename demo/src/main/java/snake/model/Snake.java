@@ -3,7 +3,7 @@ package snake.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Snake {
+public class Snake implements Collidable {
     private LinkedList<Position> body;
     private Direction direction;
 
@@ -66,11 +66,6 @@ public class Snake {
         }
         return false;
     }
-
-    //@Override
-    public boolean occupies (Position position){
-        return body.contains(position);
-    }
     
     public int length(){
         return body.size();
@@ -80,5 +75,11 @@ public class Snake {
         body.clear();
         body.add(start);
         this.direction = direction;
+    }
+
+    @Override
+    public boolean collidesWith(Position position){
+        return body.contains(position);
+
     }
 }

@@ -89,7 +89,7 @@ public class SnakeGameLogic {
 
         do{
             newPos = new Position(random.nextInt(rows), random.nextInt(cols));
-        } while (snake.occupies(newPos));
+        } while (snake.collidesWith(newPos));
 
         if (food == null){
             food = new Food(newPos);
