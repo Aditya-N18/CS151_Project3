@@ -51,7 +51,7 @@ Maven: For dependency management and automated builds.
 ## Contributions
 **Thy:** Game Manager (entire) + Blackjack save/load + utils (incl. encryption)
 
-**Serife:** Blackjack core logic + Blackjack JavaFX UI
+**Serife:** Blackjack core logic + Blackjack JavaFX UI + music
 
 **Adithi:** Snake core logic
 
