@@ -1,8 +1,10 @@
 package snake.controller;
 
+import javafx.scene.input.KeyEvent;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import snake.model.Direction;
@@ -63,7 +65,9 @@ public class SnakeGameController {
             } else if (key == KeyCode.R && model.isGameOver()) {
                 restartGame();
             }
+            event.consume();
         });
+
     }
 
     private void setupGameLoop() {
@@ -94,16 +98,18 @@ public class SnakeGameController {
         String username = nav.getCurrentUser();
         int score = model.getScore();
 
-        nav.getHighScoreManager().recordScore("snake", username, score);
+        nav.getHighScoreManager().recordScore(username, "Snake", score);
     }
 
     private void restartGame() {
         gameLoop.stop();
-        scoreSaved = false;
+
         model.reset();
         view.draw();
-        view.getRoot().requestFocus();
 
-        gameLoop.playFromStart();
+        gameLoop = new Timeline(
+                new KeyFrame(Duration.millis(150), event -> updateGame()));
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+        gameLoop.play();
     }
 }

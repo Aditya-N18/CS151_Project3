@@ -16,3 +16,4 @@ aditya|snake|10
 aditya|snake|0
 aditya|snake|0
 aditya|snake|10
+Snake|aditya|60
