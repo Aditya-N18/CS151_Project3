@@ -1,5 +1,6 @@
 blackjack|default|1000
 snake|default|1000
+<<<<<<< HEAD
 aditya|snake|0
 aditya|snake|0
 aditya|snake|0
@@ -17,3 +18,5 @@ aditya|snake|0
 aditya|snake|0
 aditya|snake|10
 Snake|aditya|60
+=======
+>>>>>>> 71465882ff13ea2dfe1315322534b88c7f760337
