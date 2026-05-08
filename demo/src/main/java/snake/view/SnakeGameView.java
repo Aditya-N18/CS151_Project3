@@ -5,6 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import manager.controller.NavigationController;
+import utils.MusicPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import manager.controller.NavigationController;
@@ -42,6 +44,7 @@ public class SnakeGameView {
         canvas.setLayoutY(50);
 
         gc = canvas.getGraphicsContext2D();
+        MusicPlayer.play("snake_theme.mp3");
 
         root.getChildren().addAll(scoreLabel, canvas);
 
