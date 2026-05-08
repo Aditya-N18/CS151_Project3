@@ -26,7 +26,7 @@ public class Snake {
         return direction;
     }
 
-    public void setDirectioin(Direction d){
+    public void setDirection(Direction d){
         this.direction = d;
     }
 
@@ -39,12 +39,16 @@ public class Snake {
         switch (direction){
             case UP:
                 newRow--;
+                break;
             case DOWN:
                 newRow++;
+                break;
             case LEFT:
                 newCol--;
+                break;
             case RIGHT:
                 newCol++;
+                break;
         }
 
         body.addFirst(new Position(newRow, newCol));
