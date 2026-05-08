@@ -22,9 +22,15 @@ public class MainMenuController {
         this.view = view;
     }
 
+<<<<<<< HEAD
+    // public void launchBlackjack() {
+    // nav.goToBlackjackMenu();
+    // }
+=======
     public void launchBlackjack() {
         nav.goToBlackjackMenu();
     }
+>>>>>>> 71465882ff13ea2dfe1315322534b88c7f760337
 
     public void launchSnake() {
         nav.goToSnakeGame();
