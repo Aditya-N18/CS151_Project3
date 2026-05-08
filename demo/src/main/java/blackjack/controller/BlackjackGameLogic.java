@@ -57,7 +57,6 @@ public class BlackjackGameLogic {
         return phase;
     }
 
-    /** Test/save-load hook. */
     public void setPhase(Phase phase) {
         this.phase = phase;
     }
@@ -111,6 +110,7 @@ public class BlackjackGameLogic {
         runRemainderOfRound();
     }
 
+    // Autoplay the rest of the round after the human player stands or busts
     private void runRemainderOfRound() {
         phase = Phase.AI1_TURN;
         playAIPlayer(aiPlayer1);

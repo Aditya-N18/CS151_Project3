@@ -11,6 +11,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -33,7 +39,11 @@ public class BlackjackMenuView {
 
     private VBox build() {
         Label title = new Label("Blackjack Menu");
-        title.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
+        title.setStyle(
+                "-fx-font-size: 32px;"
+                        + " -fx-font-weight: bold;"
+                        + " -fx-text-fill: white;"
+                        + " -fx-effect: dropshadow(gaussian, black, 8, 0.4, 0, 2);");
 
         Button startBtn = new Button("Start New Game");
         styleMenuButton(startBtn);
@@ -46,13 +56,42 @@ public class BlackjackMenuView {
         VBox box = new VBox(14, title, startBtn, loadBtn);
         box.setAlignment(Pos.CENTER);
         box.setPadding(new Insets(40));
+        applyBackground(box);
         return box;
     }
 
+    private static void applyBackground(Region region) {
+        Image image = new Image(
+                BlackjackMenuView.class.getResource("/images/blackjack_menu_bg.png")
+                        .toExternalForm(),
+                false);
+        BackgroundImage bg = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(
+                        BackgroundSize.AUTO,
+                        BackgroundSize.AUTO,
+                        true,
+                        true,
+                        false,
+                        true));
+        region.setBackground(new Background(bg));
+    }
+
     private static void styleMenuButton(Button b) {
-        b.setPrefWidth(200);
-        b.setPrefHeight(50);
-        b.setStyle("-fx-font-size: 16px;");
+        b.setPrefWidth(220);
+        b.setPrefHeight(54);
+        b.setStyle(
+                "-fx-font-size: 16px;"
+                        + " -fx-font-weight: bold;"
+                        + " -fx-background-color: rgba(255, 255, 255, 0.92);"
+                        + " -fx-text-fill: #1a1a1a;"
+                        + " -fx-background-radius: 8;"
+                        + " -fx-border-color: #d4a017;"
+                        + " -fx-border-width: 2;"
+                        + " -fx-border-radius: 8;");
     }
 
     private void handleLoad() {
