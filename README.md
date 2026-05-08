@@ -56,3 +56,6 @@ Maven: For dependency management and automated builds.
 **Adithi:** Snake core logic
 
 **Aditya:** Snake JavaFX UI + game-loop driver + overlays
+
+## Video
+<iframe title="CS 151 Project 3" width='15' height='NaN' scrolling='no' frameborder='0' style='border: none;' src='https://www.wevideo.com/embed/#4088898542' allowfullscreen></iframe>
