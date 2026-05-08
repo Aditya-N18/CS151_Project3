@@ -59,5 +59,4 @@ Maven: For dependency management and automated builds.
 
 ## Video
 
-[![Watch the video](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.wevideo.com/view/4088898542)
-
+<iframe title="CS 151 Project 3" width='480' height='270' scrolling='no' frameborder='0' style='border: none;' src='https://www.wevideo.com/embed/#4088898542' allowfullscreen></iframe>
