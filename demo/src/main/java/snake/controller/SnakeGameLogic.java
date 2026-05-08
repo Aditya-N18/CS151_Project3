@@ -36,11 +36,15 @@ public class SnakeGameLogic {
         spawnFood();
     }
 
+    public void startGame(){
+        resetGame();
+    }
+
     public void update(){
         if (gameOver || paused)
             return;
 
-        boolean eating = willEatFood();
+        boolean eating = hasEatenFood();
 
         snake.move(eating);
 
@@ -54,7 +58,13 @@ public class SnakeGameLogic {
         }
     }
 
-    private boolean willEatFood(){
+    public void changeDirection(Direction direction){
+        if (!snake.getDirection().isOpposite(direction)){
+            snake.setDirection(direction);
+        }
+    }
+
+    private boolean hasEatenFood(){
         Position head = snake.getHead();
         int nextRow = head.getRow();
         int nextCol = head.getCol();
@@ -78,6 +88,10 @@ public class SnakeGameLogic {
         return nextPos.equals(food.getPosition());
     }
 
+    public boolean hasCollision(){
+        return isOutOfBounds() || snake.hitsItself();
+    }
+
     private boolean isOutOfBounds(){
         Position head = snake.getHead();
         return head.getRow()<0 || head.getRow() >= rows ||
@@ -99,6 +113,9 @@ public class SnakeGameLogic {
         }
     }
 
+    public void pause(){
+        this.paused = true;
+    }
     public Snake getSnake(){
         return snake;
     }
@@ -111,6 +128,10 @@ public class SnakeGameLogic {
         return score;
     }
 
+    public boolean isPaused(){
+        return paused;
+    }
+
     public boolean isGameOver(){
         return gameOver;
     }
@@ -118,6 +139,5 @@ public class SnakeGameLogic {
     public void togglePause(){
         this.paused = !this.paused;
     }
-
 
 }
