@@ -47,6 +47,26 @@ public class Hand {
         return total;
     }
 
+    // A hand is "soft" when at least one ace is still being counted as 11
+    public boolean isSoft() {
+        int total = 0;
+        int aceCount = 0;
+
+        for (Card card : cards) {
+            total += card.getValue();
+            if (card.getRank() == Card.Rank.ACE) {
+                aceCount++;
+            }
+        }
+
+        while (total > 21 && aceCount > 0) {
+            total -= 10;
+            aceCount--;
+        }
+
+        return aceCount > 0 && total <= 21;
+    }
+
     public boolean isBust() {
         return getValue() > 21;
     }

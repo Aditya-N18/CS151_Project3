@@ -13,6 +13,7 @@ import manager.view.LoginView;
 import manager.view.MainMenuView;
 import manager.view.ToolbarView;
 import snake.view.SnakeGameView;
+import utils.Constants;
 
 //handle navigation between major screens like login, main menu and games
 //also hold the toolbar
@@ -28,6 +29,9 @@ public class NavigationController {
     private final ToolbarView toolbar = new ToolbarView();
     private Scene shellScene;
     private String currentUser;
+    // Live blackjack game view, set on goToBlackjackGame() and drained by
+    // goToMainMenu() so the human's final balance gets recorded as a score.
+    private BlackjackGameView currentBlackjackView;
 
     public NavigationController(Stage stage, AccountManager accounts, HighScoreManager scores) {
         this.stage = stage;
@@ -69,6 +73,7 @@ public class NavigationController {
     }
 
     public void goToMainMenu() {
+        recordBlackjackScoreIfActive();
         installShellSceneIfNeeded();
         toolbar.updateForScene("mainmenu");
         MainMenuController controller = new MainMenuController(this, scores);
@@ -76,6 +81,22 @@ public class NavigationController {
         controller.bind(view);
         controller.refreshLeaderboards();
         setRootWithToolbar(view.getRoot());
+    }
+
+    /**
+     * If the user is leaving an active blackjack game, persist their final
+     * balance as a high-score row before navigating away. Cleared after one
+     * call so re-entry doesn't double-record.
+     */
+    private void recordBlackjackScoreIfActive() {
+        if (currentBlackjackView == null) {
+            return;
+        }
+        int balance = currentBlackjackView.getLogic().getHumanPlayer().getBalance();
+        if (currentUser != null) {
+            scores.recordScore(currentUser, Constants.GAME_BLACKJACK, balance);
+        }
+        currentBlackjackView = null;
     }
 
     public void goToBlackjackMenu() {
@@ -89,6 +110,7 @@ public class NavigationController {
         installShellSceneIfNeeded();
         toolbar.updateForScene("blackjack-game");
         BlackjackGameView view = new BlackjackGameView(this);
+        this.currentBlackjackView = view;
         setRootWithToolbar(view.getRoot());
     }
 

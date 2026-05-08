@@ -22,9 +22,9 @@ public class MainMenuController {
         this.view = view;
     }
 
-public void launchBlackjack() {
-    nav.goToBlackjackMenu();
-}
+    public void launchBlackjack() {
+        nav.goToBlackjackMenu();
+    }
 
     public void launchSnake() {
         nav.goToSnakeGame();
